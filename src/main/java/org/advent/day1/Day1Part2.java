@@ -47,7 +47,7 @@ public class Day1Part2 {
     }
 
     public static void main(String[] args) throws IOException {
-        List<String> input = Util.readInput("C:\\Users\\Mohamed Enn\\Desktop\\adventofcode2024\\src\\main\\java\\org\\advent\\day1\\inputs.txt");
+        List<String> input = Util.readInput("inputs.txt");
         List<Integer> lList = new ArrayList<>();
         List<Integer> rList = new ArrayList<>();
         for(String s: input){
