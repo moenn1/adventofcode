@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * The unusual data (your puzzle input) consists of many reports, one report per line. Each report is a list of numbers called levels that are separated by spaces. For example:
@@ -36,13 +37,10 @@ import java.util.List;
 public class Day2Part1 {
 
     static int day2part1(List<List<Integer>> input) {
-        int safeCount = 0;
-        for (List<Integer> l1 : input) {
-           if (isSafeList(l1)) {
-               safeCount++;
-           }
-        }
-        return safeCount;
+        return (int) input
+                .stream()
+                .filter(Day2Part1::isSafeList)
+                .count();
     }
 
     static boolean isSafeList(List<Integer> list) {
@@ -66,7 +64,7 @@ public class Day2Part1 {
 
 
     public static void main(String[] args) throws IOException {
-        List<String> input = Util.readInput("inputs.txt");
+        List<String> input = Util.readInput("C:\\Users\\Mohamed Enn\\Desktop\\adventofcode2024\\src\\main\\java\\org\\advent\\day2\\inputs.txt");
         List<List<Integer>> inputList = new ArrayList<>();
         for(String s: input){
             String[] numbers = s.split("\\s+");

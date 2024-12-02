@@ -6,29 +6,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Day2Part2 {
 
     static int day2part2(List<List<Integer>> input) {
-        int safeCount = 0;
-        for (List<Integer> l1 : input) {
-            if (isSafeList(l1)) {
-                safeCount++;
-                continue;
-            }
-
-            // remove each level and check if list safe
-            for (int removeIndex = 0; removeIndex < l1.size(); removeIndex++) {
-                List<Integer> modifiedList = new ArrayList<>(l1);
-                modifiedList.remove(removeIndex);
-
-                if (isSafeList(modifiedList)) {
-                    safeCount++;
-                    break;
-                }
-            }
-        }
-        return safeCount;
+        return (int) input.stream()
+                .filter(list -> isSafeList(list) || // if the list is safe
+                        IntStream.range(0, list.size())         // if not we heuristically remove elements and check if the list becomes safe
+                                .anyMatch(removeIndex -> {
+                                    List<Integer> modifiedList = new ArrayList<>(list);
+                                    modifiedList.remove(removeIndex);
+                                    return isSafeList(modifiedList);
+                                }))
+                .count();
     }
 
     static boolean isSafeList(List<Integer> list) {
