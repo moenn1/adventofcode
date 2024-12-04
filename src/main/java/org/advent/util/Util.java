@@ -20,4 +20,30 @@ public class Util {
         }
         return result;
     }
+
+    public static List<String> rotateMatrix(List<String> input) {
+        int rows = input.size();
+        int cols = input.getFirst().length();
+
+        List<String> rotated = new ArrayList<>();
+
+        for (int col = 0; col < cols; col++) {
+            StringBuilder sb = new StringBuilder();
+            for (int row = rows - 1; row >= 0; row--) {
+                sb.append(input.get(row).charAt(col));
+            }
+            rotated.add(sb.toString());
+        }
+
+        return rotated;
+    }
+
+    public static void print2DCharArray(char[][] array) {
+        for (char[] row : array) {
+            for (char c : row) {
+                System.out.print(c + " ");
+            }
+            System.out.println();
+        }
+    }
 }
